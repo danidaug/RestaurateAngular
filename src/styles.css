@@ -556,3 +556,43 @@
 body{
   margin: 0;
 }
+/* Alto contraste */
+body.high-contrast {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+body.high-contrast * {
+  background-color: #000 !important;
+  color: #ffff00 !important; /* Texto amarillo sobre negro */
+  border-color: #fff !important;
+}
+
+/* Escala de grises */
+body.grayscale-mode {
+  filter: grayscale(100%);
+}
+
+body.force-bold,
+body.force-bold * {
+  font-weight: 700 !important;
+}
+
+body.highlight-links a {
+  background-color: #ffeb3b !important;
+  color: #000 !important;
+  text-decoration: underline wavy #e91e63 3px !important;
+  font-weight: bold !important;
+  padding: 2px 4px !important;
+  border-radius: 4px !important;
+}
+
+
+body.highlight-links a img {
+  outline: 4px solid #ffeb3b !important;
+}
+
+body.focus-outline *:focus {
+  outline: 5px solid #ff9800 !important; 
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 10px rgba(255, 152, 0, 0.3) !important;
+}

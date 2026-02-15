@@ -1,0 +1,44 @@
+<div class="accessibility-wrapper" [class.open]="isOpen">
+  <button class="access-btn" (click)="toggleMenu()">
+    <span class="icon">♿</span>
+  </button>
+
+  <div class="access-menu">
+    <h3>Accesibilidad</h3>
+    <hr>
+    <h4>Texto</h4>
+
+    <div class="option">
+      <button (click)="toggleBold()" [class.active-opt]="isBold">
+        <b>B</b> Texto en Negrita {{ isBold ? '(ON)' : '(OFF)' }}
+      </button>
+    </div>
+
+    <div class="option">
+      <button (click)="changeFontSize('increase')">➕ Aumentar Texto</button>
+      <button (click)="changeFontSize('reset')">🔄 Reset</button>
+    </div>
+    <br>
+    <hr>
+    <h4>Visual</h4>
+    <div class="option">
+      <button (click)="toggleContrast()">🌓 Alto Contraste</button>
+    </div>
+
+    <div class="option">
+      <button (click)="toggleGrayscale()">🔳 Escala de grises</button>
+    </div>
+    <br>
+    <hr>
+    <h4>Orientación</h4>
+    <div class="option">
+      <button (click)="toggleLinks()" [class.active-opt]="isLinksHighlighted">
+        🔗 Resaltar Enlaces {{ isLinksHighlighted ? '(ON)' : '(OFF)' }}
+      </button>
+    </div>
+    <div class="option">
+      <button (click)="toggleFocus()" [class.active-opt]="isFocusEnabled">
+        🎯 Enfoque Contorno {{ isFocusEnabled ? '(ON)' : '(OFF)' }}
+      </button>
+    </div>
+</div>

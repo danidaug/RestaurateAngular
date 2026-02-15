@@ -1,0 +1,74 @@
+.accessibility-wrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 20px; /* O a la derecha */
+  z-index: 9999;
+}
+
+/* El botón redondo */
+.access-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+}
+
+.access-btn:hover {
+  transform: scale(1.1);
+}
+
+/* El panel lateral (oculto por defecto) */
+.access-menu {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  width: 250px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  display: none; /* Se activa con la clase .open */
+  border: 1px solid #ddd;
+}
+
+.open .access-menu {
+  display: block;
+}
+
+.access-menu h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.option {
+  margin: 10px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.option button {
+  flex: 1;
+  padding: 8px;
+  cursor: pointer;
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.option button.active-opt {
+  background-color: #0056b3 !important;
+  color: white !important;
+  border-color: #004494;
+  font-weight: bold;
+}
+
+
+body.grayscale-mode .accessibility-wrapper {
+  filter: grayscale(0%) !important;
+}
