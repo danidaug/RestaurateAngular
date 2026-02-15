@@ -1,0 +1,53 @@
+<h1 class="main-title">Nuestra Carta</h1>
+
+<div class="sidebar">
+  <div id="filter" class="filter-box">
+    <div class="filter-header">Filtrar por categoría</div>
+    <div id="btns" class="filter-buttons">
+      <button (click)="changeCategory('todos')" [class.active]="category === 'todos'">Todos</button>
+      <button (click)="changeCategory('entrantes')" [class.active]="category === 'entrantes'">Entrantes</button>
+      <button (click)="changeCategory('segundos')" [class.active]="category === 'segundos'">Segundos</button>
+      <button (click)="changeCategory('postres')" [class.active]="category === 'postres'">Postres</button>
+    </div>
+  </div>
+
+  <div class="sort-box">
+    <span>Ordenar precio:</span>
+    <button class="btn-sort" (click)="sortPrice('asc')">↑ Baratos</button>
+    <button class="btn-sort" (click)="sortPrice('desc')">↓ Caros</button>
+  </div>
+</div>
+
+@if (dishes$ | async; as dishes) {
+  <div class="dishes">
+  <div class="dishes-grid">
+    @for (dish of (dishes | dishFilter:category); track dish.id) {
+      @if (dish.enabled) {
+        <div class="dish-card">
+          <div class="image-container">
+            <img [src]="dish.image ? dish.image : 'assets/placeholder.png'" [alt]="dish.name">
+            <span class="category-badge">{{ dish.category }}</span>
+          </div>
+          <div class="dish-info">
+            <h3>{{ dish.name }}</h3>
+            <p class="description">{{ dish.description }}</p>
+            <div class="price-row">
+              <span class="price">{{ dish.price | currency:'EUR' }}</span>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+      }
+    } @empty {
+      <div class="empty-state">
+        <p>No hay platos habilitados en esta categoría.</p>
+      </div>
+    }
+  </div>
+  </div>
+} @else {
+  <div class="loading">
+    <div class="spinner"></div>
+    <p>Cargando sabores...</p>
+  </div>
+}

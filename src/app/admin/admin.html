@@ -1,0 +1,78 @@
+<div class="admin-wrapper">
+  <h1 class="admin-title">Panel de Gestión</h1>
+
+  <div class="form-container">
+    <h2 class="form-title">
+      {{ isEditing ? '📝 Editando: ' + dishForm.value.name : '➕ Añadir Nuevo Plato' }}
+    </h2>
+
+    <form [formGroup]="dishForm" (ngSubmit)="onSubmit()" class="admin-form">
+      <div class="form-group">
+        <input type="text" formControlName="name" placeholder="Nombre del plato">
+      </div>
+
+      <div class="form-group">
+        <textarea formControlName="description" placeholder="Descripción (ej: Ensalada de tomate...)"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <input type="number" formControlName="price" placeholder="Precio (€)">
+        </div>
+        <div class="form-group">
+          <select formControlName="category">
+            <option value="entrantes">Entrantes</option>
+            <option value="segundos">Segundos</option>
+            <option value="postres">Postres</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="text" formControlName="image" placeholder="URL de la imagen (https://...)">
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-save" [disabled]="dishForm.invalid">
+          {{ isEditing ? 'Actualizar Cambios' : 'Añadir a la Carta' }}
+        </button>
+        <button type="button" class="btn-cancel" *ngIf="isEditing" (click)="resetForm()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-container">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (dish of dishes; track dish.id) {
+          <tr [class.disabled-row]="!dish.enabled">
+            <td class="font-bold">{{ dish.name }}</td>
+            <td class="price-cell">{{ dish.price | currency:'EUR' }}</td>
+            <td>
+              <span class="status-badge" [class.enabled]="dish.enabled">
+                {{ dish.enabled ? 'Habilitado' : 'Deshabilitado' }}
+              </span>
+            </td>
+            <td class="actions-cell">
+              <button class="btn-toggle" (click)="toggleEnabled(dish)">
+                {{ dish.enabled ? 'Apagar' : 'Encender' }}
+              </button>
+              <button class="btn-edit" (click)="editDish(dish)">Editar</button>
+              <button class="btn-delete" (click)="remove(dish.id)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
